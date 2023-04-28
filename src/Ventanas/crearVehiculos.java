@@ -251,13 +251,10 @@ public class crearVehiculos extends javax.swing.JPanel {
             String sql = "INSERT INTO vehiculo (Patente, marca, TipoVehiculo, Propietario, horaEntrada, estado ) VALUES ('" + tipo.getPatente()+ "','" + tipo.getMarca() + "','" + tipo.getTipoVehiculo() + "','" + people.getNombre() + "','" + fechaHora + "','Disponible')";
             stat.executeUpdate(sql);
             JOptionPane.showMessageDialog(null, "El vehiculo se registro exitosamente");
+            people.saludo();
             
             
-            JOptionPane.showMessageDialog(null,tipo.getPatente());
-            JOptionPane.showMessageDialog(null,people.getNombre());
-            JOptionPane.showMessageDialog(null, fechaHora);
-            JOptionPane.showMessageDialog(null,tipo.getTipoVehiculo());
-            JOptionPane.showMessageDialog(null,tipo.getMarca());
+
         } catch(SQLException ex) {
             Logger.getLogger(crearVehiculos.class.getName()).log(Level.SEVERE, null, ex);
         }  
