@@ -1,18 +1,5 @@
 package Ventanas;
 
-
-import javax.swing.border.Border;
-import javax.swing.text.Document;
-/*
-import com.itextpdf.kernel.geom.PageSize;
-import com.itextpdf.kernel.pdf.PdfDocument;
-import com.itextpdf.kernel.pdf.PdfWriter;
-import com.itextpdf.layout.element.Paragraph;
-*/
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -24,23 +11,27 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-
+import estacionamientosnuevaera.Vehiculo;
+import estacionamientosnuevaera.PropietarioVehiculo;
 
 /**
- *
- * @author draco
+ * @author Diego Ortega
+ * @Email: draco_9431@hotmail.com
+ * @fecha creacion 19/04/2023
  */
 public class crearVehiculos extends javax.swing.JPanel {
-
-
+    //crea variable local
+    String fechaHora;
    
     public crearVehiculos() {
         initComponents();
         
+        //Valida y verifica que la libreria esta instalada
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-        } catch (ClassNotFoundException ex){
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
             Logger.getLogger(crearVehiculos.class.getName()).log(Level.SEVERE, null, ex);
+
         }
     }
 
@@ -57,8 +48,10 @@ public class crearVehiculos extends javax.swing.JPanel {
         jBAuto = new javax.swing.JRadioButton();
         jButtonRegistrar = new javax.swing.JButton();
         TFPatente = new javax.swing.JTextField();
-        TFDueño = new javax.swing.JTextField();
+        TFMarca = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        jLabelMarca = new javax.swing.JLabel();
+        TFDueño2 = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(51, 153, 255));
         setPreferredSize(new java.awt.Dimension(736, 620));
@@ -121,10 +114,22 @@ public class crearVehiculos extends javax.swing.JPanel {
             }
         });
 
-        TFDueño.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 14)); // NOI18N
-        TFDueño.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        TFMarca.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 14)); // NOI18N
+        TFMarca.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        TFMarca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TFMarcaActionPerformed(evt);
+            }
+        });
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Vehiculo estacionado.png"))); // NOI18N
+
+        jLabelMarca.setFont(new java.awt.Font("Perpetua", 0, 48)); // NOI18N
+        jLabelMarca.setForeground(new java.awt.Color(242, 242, 242));
+        jLabelMarca.setText("Marca");
+
+        TFDueño2.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 14)); // NOI18N
+        TFDueño2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -136,14 +141,19 @@ public class crearVehiculos extends javax.swing.JPanel {
                         .addGap(25, 25, 25)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabelCrearvehiculo)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabelPatente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabelDueño, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(56, 56, 56)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(TFPatente, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(TFDueño, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabelMarca)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(TFMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabelPatente)
+                                    .addGap(56, 56, 56)
+                                    .addComponent(TFPatente, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(jLabelDueño, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(TFDueño2, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(91, 91, 91)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -155,7 +165,7 @@ public class crearVehiculos extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(106, 106, 106)
                         .addComponent(jLabelTipoVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
@@ -167,10 +177,15 @@ public class crearVehiculos extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(TFPatente)
                     .addComponent(jLabelPatente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabelDueño, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TFDueño, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(TFMarca)
+                        .addGap(3, 3, 3))
+                    .addComponent(jLabelMarca))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabelDueño, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(TFDueño2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabelTipoVehiculo)
                 .addGap(30, 30, 30)
@@ -183,8 +198,6 @@ public class crearVehiculos extends javax.swing.JPanel {
             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
-    String fechaHora = "";
-     public static final String DEST = "proyectoparqueadero/hello_world.pdf";
     private void jBMotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBMotoActionPerformed
     }//GEN-LAST:event_jBMotoActionPerformed
 
@@ -193,36 +206,64 @@ public class crearVehiculos extends javax.swing.JPanel {
     }//GEN-LAST:event_jBAutoActionPerformed
 
     private void TFPatenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFPatenteActionPerformed
-
+        Vehiculo tipo = new Vehiculo();
+        tipo.validarPatente();
     }//GEN-LAST:event_TFPatenteActionPerformed
 
     private void jButtonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarActionPerformed
         //Define el tipo de vehiculo guardando este dato en una variable local
-        String claseVehiculo = "";
+        Vehiculo tipo = new Vehiculo();
+        PropietarioVehiculo people = new PropietarioVehiculo("","");
         if(jBAuto.isSelected()){
-            claseVehiculo = "Automovil";
+            tipo.setTipoVehiculo("Automovil");  
         }
-        if(jBMoto.isSelected()){
-            claseVehiculo="Moto";
+        else if(jBMoto.isSelected()){
+            tipo.setTipoVehiculo("Moto");
         }
-        // Conexión con la base de datos
+        else {
+            JOptionPane.showMessageDialog(null,"Seleccione un tipo de vehiculo","Alerta", JOptionPane.WARNING_MESSAGE);
+        }
+        
         try {
+            // Conexión con la base de datos
             Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/estacionamientonuevaera","root", "");
+            tipo.setPatente(TFPatente.getText());
+            if (TFPatente.getText().length() == 0)
+                tipo.setPatente("");
+            tipo.setMarca(TFMarca.getText());
+            people.setNombre(TFDueño2.getText());
+            tipo.validarPatente();
+            tipo.validarMarca();
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Calendar cal = Calendar.getInstance();
             Date date = cal.getTime();
             fechaHora = dateFormat.format(date);
+            /*for (int i=0; i<fechaHora.;i++){
+                if (fechaHora[i]!= null){
+                    fechaHora[i] = dateFormat.format(date);
+                    JOptionPane.showMessageDialog(null, fechaHora[i]);
+            }else{
+                JOptionPane.showMessageDialog(null, "ya esta opcupado");
+                }
+            }*/
             System.out.print(dateFormat.format(date));
             Statement stat = conexion.createStatement();
-            String sql = "INSERT INTO vehiculo (Patente, TipoVehiculo, Propietario, horaEntrada, estado) VALUES ('" + TFPatente.getText() + "','" + claseVehiculo + "','" + TFDueño.getText() +  "','"  + fechaHora + "','Disponible')";
+            String sql = "INSERT INTO vehiculo (Patente, marca, TipoVehiculo, Propietario, horaEntrada, estado ) VALUES ('" + tipo.getPatente()+ "','" + tipo.getMarca() + "','" + tipo.getTipoVehiculo() + "','" + people.getNombre() + "','" + fechaHora + "','Disponible')";
             stat.executeUpdate(sql);
             JOptionPane.showMessageDialog(null, "El vehiculo se registro exitosamente");
-
-        } catch (SQLException ex) {
+            
+            
+            JOptionPane.showMessageDialog(null,tipo.getPatente());
+            JOptionPane.showMessageDialog(null,people.getNombre());
+            JOptionPane.showMessageDialog(null, fechaHora);
+            JOptionPane.showMessageDialog(null,tipo.getTipoVehiculo());
+            JOptionPane.showMessageDialog(null,tipo.getMarca());
+        } catch(SQLException ex) {
             Logger.getLogger(crearVehiculos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }  
+                      
         
-        /*Error con las importaciones
+        /*Error con las librerias para generar voucher 
         String dest = "C:\\Users/draco/OneDrive/Escritorio/sample.pdf";
         
         try{
@@ -231,9 +272,9 @@ public class crearVehiculos extends javax.swing.JPanel {
             PdfDocument docPdf = new PdfDocument(escrito);
             Document documento = new Document(docPdf, PageSize.A4);
             docPdf.addNewPage();
-            
+          
             Paragraph parrafo = new Paragraph ("Boleta estacionamiento");
-                    
+                 
             parrafo.setBorder(Border.NO_BORDER);
             parrafo.setBold();
             
@@ -268,12 +309,13 @@ public class crearVehiculos extends javax.swing.JPanel {
         } catch(Exception ex){
             ex.printStackTrace();
         }*/
-        
     }//GEN-LAST:event_jButtonRegistrarActionPerformed
-
-
+    private void TFMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFMarcaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TFMarcaActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField TFDueño;
+    private javax.swing.JTextField TFDueño2;
+    private javax.swing.JTextField TFMarca;
     private javax.swing.JTextField TFPatente;
     private javax.swing.JRadioButton jBAuto;
     private javax.swing.JRadioButton jBMoto;
@@ -281,6 +323,7 @@ public class crearVehiculos extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelCrearvehiculo;
     private javax.swing.JLabel jLabelDueño;
+    private javax.swing.JLabel jLabelMarca;
     private javax.swing.JLabel jLabelPatente;
     private javax.swing.JLabel jLabelTipoVehiculo;
     // End of variables declaration//GEN-END:variables

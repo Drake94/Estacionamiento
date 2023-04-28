@@ -1,6 +1,5 @@
 package Ventanas;
 
-import java.awt.Component;
 import java.awt.Image;
 import java.awt.Toolkit;
 /**
@@ -11,24 +10,34 @@ import java.awt.Toolkit;
  */
 public class Inicio extends javax.swing.JFrame {
 
-    crearVehiculos crearVehiculos;
     listarVehiculos listarVehiculos;
+    fondoInicio fondoInicio;
+    crearVehiculos crea;
+    salidaVehiculo salir;
+    
     public Inicio() {
         
         initComponents();
         setSize(1280,650);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
-        crearVehiculos = new crearVehiculos();
-        crearVehiculos.setBounds(541, 0, 736, 620);
-        add(crearVehiculos);
-        crearVehiculos.setVisible(false);
         listarVehiculos = new listarVehiculos();
         listarVehiculos.setBounds(541, 0, 736, 620);
         add(listarVehiculos);
         listarVehiculos.setVisible(false);
-        
-            
+        fondoInicio= new fondoInicio();
+        fondoInicio.setBounds(541, 0, 736, 620);
+        add(fondoInicio);
+        fondoInicio.setVisible(true);
+        crea = new crearVehiculos();
+        crea.setBounds(541,0,736,620);
+        crea.setVisible(false);
+        add(crea);
+        salir = new salidaVehiculo();
+        salir.setBounds(541,0,736,620);
+        salir.setVisible(false);
+        add(salir);
+     
     }
     
     
@@ -42,7 +51,6 @@ public class Inicio extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jButtonCrear = new javax.swing.JButton();
         jButtonSalir = new javax.swing.JButton();
@@ -50,19 +58,8 @@ public class Inicio extends javax.swing.JFrame {
         jButtonListar = new javax.swing.JButton();
         jButtonSalida = new javax.swing.JButton();
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(0, 0, 0));
+        setBackground(new java.awt.Color(102, 204, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         getContentPane().setLayout(null);
 
@@ -167,8 +164,10 @@ public class Inicio extends javax.swing.JFrame {
     private void jButtonCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearActionPerformed
         //Boton redirige a crear vehiculo
         setSize(1280, 650 );
-        crearVehiculos.setVisible(true);
+        crea.setVisible(true);
         listarVehiculos.setVisible(false);
+        fondoInicio.setVisible(false);
+        salir.setVisible(false);
         revalidate();
         repaint();
     }//GEN-LAST:event_jButtonCrearActionPerformed
@@ -176,14 +175,22 @@ public class Inicio extends javax.swing.JFrame {
     private void jButtonListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListarActionPerformed
         //Boton redirige a listar vehiculos
         setSize(1280, 650 );
-        crearVehiculos.setVisible(false);
+        crea.setVisible(false);
         listarVehiculos.setVisible(true);
+        fondoInicio.setVisible(false);
+        salir.setVisible(false);
         revalidate();
         repaint();
     }//GEN-LAST:event_jButtonListarActionPerformed
 
     private void jButtonSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalidaActionPerformed
-        // TODO add your handling code here:
+        setSize(1280, 650 );
+        crea.setVisible(false);
+        listarVehiculos.setVisible(false);
+        fondoInicio.setVisible(false);
+        salir.setVisible(true);
+        revalidate();
+        repaint();
     }//GEN-LAST:event_jButtonSalidaActionPerformed
 
 
@@ -222,7 +229,6 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JButton jButtonSalida;
     private javax.swing.JButton jButtonSalir;
     private javax.swing.JLabel jLabelFondo;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 }

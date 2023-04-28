@@ -21,68 +21,60 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace min="-2" pref="117" max="-2" attributes="0"/>
+              <Component id="jButtonBuscar" min="-2" pref="100" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="jButton1" min="-2" pref="100" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="139" max="-2" attributes="0"/>
+          </Group>
           <Group type="102" attributes="0">
+              <EmptySpace min="-2" pref="191" max="-2" attributes="0"/>
+              <Component id="jLabelListar" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabelTipovehiculoBuscar" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabelUbicacion" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="cbMoto" min="-2" max="-2" attributes="0"/>
-                          <Component id="rbFuera" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="cbauto" min="-2" max="-2" attributes="0"/>
-                          <Component id="rbEstacionado" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace pref="299" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="jScrollPane1" min="-2" pref="663" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabelPatenteBuscar" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabelDueñoBuscar" alignment="0" min="-2" pref="60" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="tf1Dueño" min="-2" pref="165" max="-2" attributes="0"/>
-                              <EmptySpace pref="158" max="32767" attributes="0"/>
-                              <Component id="jLabelFecha" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="cal" min="-2" pref="167" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                          </Group>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="tf1Dueño" alignment="0" min="-2" pref="165" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="tf1patente" min="-2" pref="165" max="-2" attributes="0"/>
-                              <EmptySpace pref="414" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="141" max="-2" attributes="0"/>
+                              <Component id="jLabelFecha" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="cal" min="-2" pref="167" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
-              </Group>
-          </Group>
-          <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="191" max="-2" attributes="0"/>
-                      <Component id="jLabelListar" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" min="-2" pref="663" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="jLabelUbicacion" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="rbFuera" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="jLabelTipovehiculoBuscar" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="cbMoto" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="cbauto" min="-2" max="-2" attributes="0"/>
+                          <Component id="rbEstacionado" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="38" max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="-2" pref="144" max="-2" attributes="0"/>
-              <Component id="jButtonBuscar" min="-2" pref="100" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="jButton1" min="-2" pref="100" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="157" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="29" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -92,47 +84,53 @@
               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               <Component id="jLabelListar" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabelPatenteBuscar" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="tf1patente" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-              </Group>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabelDueñoBuscar" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="tf1Dueño" alignment="3" pref="30" max="32767" attributes="0"/>
+                          <Component id="jLabelPatenteBuscar" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="tf1patente" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="jLabelFecha" alignment="3" pref="34" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jLabelFecha" pref="34" max="32767" attributes="0"/>
-                          <Component id="cal" max="32767" attributes="0"/>
-                      </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="cal" min="-2" pref="34" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabelTipovehiculoBuscar" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="cbauto" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="cbMoto" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelDueñoBuscar" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="tf1Dueño" alignment="3" pref="30" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabelUbicacion" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="rbEstacionado" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="rbFuera" alignment="3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabelTipovehiculoBuscar" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="cbMoto" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cbauto" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                      <Component id="jLabelUbicacion" min="-2" pref="30" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="rbFuera" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="rbEstacionado" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="169" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jButton1" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
                   <Component id="jButtonBuscar" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                  <Component id="jButton1" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+              <EmptySpace pref="75" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -279,23 +277,17 @@
         <Component class="javax.swing.JTable" name="tblVehiculos">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="7" rowCount="4">
-                <Column editable="true" title="IdVehiculo" type="java.lang.Object"/>
-                <Column editable="true" title="Patente" type="java.lang.Object"/>
-                <Column editable="true" title="Due&#xf1;o" type="java.lang.Object"/>
-                <Column editable="true" title="Tipo de vehiculo" type="java.lang.Object"/>
-                <Column editable="true" title="Hora de entrada" type="java.lang.Object"/>
-                <Column editable="true" title="Hora de salida" type="java.lang.Object"/>
-                <Column editable="true" title="Pago" type="java.lang.Object"/>
+              <Table columnCount="6" rowCount="1">
+                <Column editable="false" title="Patente" type="java.lang.String"/>
+                <Column editable="false" title="Marca" type="java.lang.String"/>
+                <Column editable="false" title="Due&#xf1;o" type="java.lang.String"/>
+                <Column editable="false" title="Tipo de vehiculo" type="java.lang.String"/>
+                <Column editable="false" title="Hora de entrada" type="java.lang.String"/>
+                <Column editable="false" title="Hora de salida" type="java.lang.String"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
-              <TableColumnModel selectionModel="0">
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
+              <TableColumnModel selectionModel="1">
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>
@@ -328,6 +320,7 @@
                 </Column>
               </TableColumnModel>
             </Property>
+            <Property name="columnSelectionAllowed" type="boolean" value="true"/>
             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
             </Property>
@@ -366,6 +359,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Cerrar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonBuscar">
       <Properties>
