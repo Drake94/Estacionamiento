@@ -8,13 +8,17 @@ package estacionamientosnuevaera;
 import javax.swing.JOptionPane;
 
 public class Vehiculo {
-    private String marca , patente, tipoVehiculo;
+    private String marca , patente, tipoVehiculo, estado, propietario;
+    private int id_Vehiculo;
     
     
     public Vehiculo(){
         this.marca = marca;
         this.patente = patente;
         this.tipoVehiculo = tipoVehiculo;
+        this.id_Vehiculo = id_Vehiculo;
+        this.estado = estado;
+        this.propietario = propietario;
     }
     
     public void validarPatente(){
@@ -56,6 +60,30 @@ public class Vehiculo {
 
     public void setTipoVehiculo(String tipoVehiculo) {
         this.tipoVehiculo = tipoVehiculo;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public String getPropietario() {
+        return propietario;
+    }
+
+    public void setPropietario(String propietario) {
+        this.propietario = propietario;
+    }
+
+    public int getId_Vehiculo() {
+        return id_Vehiculo;
+    }
+
+    public void setId_Vehiculo(int id_Vehiculo) {
+        this.id_Vehiculo = id_Vehiculo;
     }
     
 }

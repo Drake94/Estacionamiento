@@ -46,7 +46,7 @@ public class listarVehiculos extends javax.swing.JPanel {
         columnModel.getColumn(0).setPreferredWidth(40);
         columnModel.getColumn(0).setPreferredWidth(40);
         columnModel.getColumn(0).setPreferredWidth(40);
-        
+        columnModel.getColumn(0).setPreferredWidth(40);
         
         //Valida y verifica que la libreria esta instalada
         try {
@@ -83,7 +83,7 @@ public class listarVehiculos extends javax.swing.JPanel {
         try{
             Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/estacionamientonuevaera","root", "");
             Statement stat = conexion.createStatement();
-            consulta = "SELECT * FROM vehiculo WHERE estado ='"+ estado + "' AND TipoVehiculo LIKE'%" + tipoVehiculo + "%' AND Patente LIKE '%" + tf1patente.getText() + "%' AND Propietario Like '%" + tf1Dueño.getText() + "%' AND horaEntrada LIKE'" + fecha + "%'"; 
+            consulta = "SELECT * FROM vehiculo WHERE estado ='"+ estado + "' AND Tipo_Vehiculo LIKE'%" + tipoVehiculo + "%' AND Patente LIKE '%" + tf1patente.getText() + "%' AND Propietario Like '%" + tf1Dueño.getText() + "%' AND hora_Entrada LIKE'" + fecha + "%'"; 
             System.out.println(consulta);
             ResultSet rs = stat.executeQuery(consulta);
             rs.next();
@@ -98,7 +98,7 @@ public class listarVehiculos extends javax.swing.JPanel {
                     horaSalida = rs.getString(8).substring(10).substring(0,6);
                     valorPagado = rs.getString(9);
                 }
-                String[] fila = {rs.getString(2), rs.getString(3), rs.getString(5), rs.getString(4), rs.getString(7).substring(10).substring(0,6), horaSalida};
+                String[] fila = {rs.getString(2), rs.getString(3), rs.getString(5), rs.getString(4), rs.getString(7).substring(10).substring(0,6), horaSalida,"$" + valorPagado};
                 modelo.addRow(fila);           
             } while (rs.next());
             
@@ -196,17 +196,17 @@ public class listarVehiculos extends javax.swing.JPanel {
 
         tblVehiculos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Patente", "Marca", "Dueño", "Tipo de vehículo", "Hora de entrada", "Hora de salida"
+                "Patente", "Marca", "Dueño", "Tipo de vehículo", "Hora de entrada", "Hora de salida", "Pagado"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -257,38 +257,6 @@ public class listarVehiculos extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 663, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelPatenteBuscar)
-                            .addComponent(jLabelDueñoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(39, 39, 39)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tf1Dueño, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(tf1patente, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(141, 141, 141)
-                                .addComponent(jLabelFecha)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cal, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabelUbicacion)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(rbFuera))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabelTipovehiculoBuscar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cbMoto)))
-                        .addGap(30, 30, 30)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbauto)
-                            .addComponent(rbEstacionado))))
-                .addGap(0, 29, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(191, 191, 191)
@@ -299,6 +267,42 @@ public class listarVehiculos extends javax.swing.JPanel {
                         .addGap(127, 127, 127)
                         .addComponent(JBEdit)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabelPatenteBuscar)
+                                    .addComponent(jLabelDueñoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(39, 39, 39)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tf1Dueño, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(tf1patente, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(141, 141, 141)
+                                        .addComponent(jLabelFecha)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(cal, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabelUbicacion)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(rbFuera))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabelTipovehiculoBuscar)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(cbMoto)))
+                                .addGap(30, 30, 30)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cbauto)
+                                    .addComponent(rbEstacionado)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 663, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 37, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -389,7 +393,7 @@ public class listarVehiculos extends javax.swing.JPanel {
         try{
             Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/estacionamientonuevaera","root", "");
             Statement stat = conexion.createStatement();
-            consulta = "SELECT * FROM vehiculo WHERE estado ='"+ estado + "' AND TipoVehiculo LIKE'%" + tipoVehiculo + "%' AND Patente LIKE '%" + tf1patente.getText() + "%' AND Propietario Like '%" + tf1Dueño.getText() + "%' AND horaEntrada LIKE'" + fecha + "%'"; 
+            consulta = "SELECT * FROM vehiculo WHERE estado ='"+ estado + "' AND Tipo_Vehiculo LIKE'%" + tipoVehiculo + "%' AND Patente LIKE '%" + tf1patente.getText() + "%' AND Propietario Like '%" + tf1Dueño.getText() + "%' AND hora_Entrada LIKE'" + fecha + "%'"; 
             System.out.println(consulta);
             ResultSet rs = stat.executeQuery(consulta);
             rs.next();
@@ -404,7 +408,7 @@ public class listarVehiculos extends javax.swing.JPanel {
                     horaSalida = rs.getString(8).substring(10).substring(0,6);
                     valorPagado = rs.getString(9);
                 }
-                String[] fila = {rs.getString(2), rs.getString(3), rs.getString(5), rs.getString(4), rs.getString(7).substring(10).substring(0,6), horaSalida};
+                String[] fila = {rs.getString(2), rs.getString(3), rs.getString(5), rs.getString(4), rs.getString(7).substring(10).substring(0,6), horaSalida,"$" + valorPagado};
                 modelo.addRow(fila);           
             } while (rs.next());
             

@@ -241,7 +241,7 @@ public class crearVehiculos extends javax.swing.JPanel {
             fechaHora = dateFormat.format(date);
             System.out.print(dateFormat.format(date));
             Statement stat = conexion.createStatement();
-            String sql = "INSERT INTO vehiculo (Patente, marca, TipoVehiculo, Propietario, horaEntrada, estado ) VALUES ('" + tipo.getPatente()+ "','" + tipo.getMarca() + "','" + tipo.getTipoVehiculo() + "','" + people.getNombre() + "','" + fechaHora + "','Disponible')";
+            String sql = "INSERT INTO vehiculo (Patente, marca, Tipo_Vehiculo, Propietario, hora_Entrada, estado ) VALUES ('" + tipo.getPatente()+ "','" + tipo.getMarca() + "','" + tipo.getTipoVehiculo() + "','" + people.getNombre() + "','" + fechaHora + "','Disponible')";
             stat.executeUpdate(sql);
             JOptionPane.showMessageDialog(null, "El vehiculo se registro exitosamente");
             people.saludo();

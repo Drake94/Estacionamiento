@@ -1,4 +1,9 @@
 package Ventanas;
+
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Scanner;
+
 /**
  * @author Diego Ortega
  * @Email: draco_9431@hotmail.com
@@ -10,6 +15,31 @@ public class EditarDatos extends javax.swing.JPanel {
    
     public EditarDatos() {
         initComponents();
+        
+        try{
+            URL url = new URL("http://localhost:8080/vehiculo" );
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.connect();
+            
+            int responseCode =conn.getResponseCode();
+            if(responseCode != 200 ){
+                throw new RuntimeException("Ocurrio un error: " + responseCode);
+            }else{
+                StringBuilder informationString = new StringBuilder();
+                Scanner scanner = new Scanner(url.openStream());
+                 
+                while(scanner.hasNext()){
+                    informationString.append(scanner.nextLine());
+                }
+                scanner.close();
+                
+                System.out.println(informationString);
+            }
+        
+        }catch(Exception err){
+            err.printStackTrace();
+        }
         
     }
 
@@ -62,6 +92,12 @@ public class EditarDatos extends javax.swing.JPanel {
 
         JLMarca.setFont(new java.awt.Font("Perpetua", 0, 48)); // NOI18N
         JLMarca.setText("Marca");
+
+        JTFpatente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JTFpatenteActionPerformed(evt);
+            }
+        });
 
         JTFdueno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -167,6 +203,10 @@ public class EditarDatos extends javax.swing.JPanel {
         list.repaint();
         list.revalidate();
     }//GEN-LAST:event_jBVolverActionPerformed
+
+    private void JTFpatenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFpatenteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JTFpatenteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

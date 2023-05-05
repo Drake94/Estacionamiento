@@ -53,7 +53,9 @@ public class salidaVehiculo extends javax.swing.JPanel {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Vehiculo estacionado.png"))); // NOI18N
 
-        BTCobrar.setFont(new java.awt.Font("Perpetua", 0, 36)); // NOI18N
+        BTCobrar.setBackground(new java.awt.Color(255, 255, 255));
+        BTCobrar.setFont(new java.awt.Font("Perpetua", 1, 36)); // NOI18N
+        BTCobrar.setForeground(new java.awt.Color(51, 153, 255));
         BTCobrar.setText("Cobrar");
         BTCobrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -63,9 +65,9 @@ public class salidaVehiculo extends javax.swing.JPanel {
 
         JLtitulo.setFont(new java.awt.Font("Perpetua", 1, 58)); // NOI18N
         JLtitulo.setForeground(new java.awt.Color(255, 255, 255));
-        JLtitulo.setText("Salida de vehiculos");
+        JLtitulo.setText("Salida de vehículo");
 
-        JLingrese.setFont(new java.awt.Font("Perpetua", 0, 48)); // NOI18N
+        JLingrese.setFont(new java.awt.Font("Perpetua", 1, 48)); // NOI18N
         JLingrese.setForeground(new java.awt.Color(255, 255, 255));
         JLingrese.setText("Ingrese Patente");
 
@@ -84,20 +86,19 @@ public class salidaVehiculo extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 33, Short.MAX_VALUE)
+                        .addGap(0, 54, Short.MAX_VALUE)
                         .addComponent(JLtitulo)
                         .addGap(30, 30, 30))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(134, 134, 134)
-                                .addComponent(JLingrese))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(173, 173, 173)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(BTCobrar, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
-                                    .addComponent(tfPatentesal))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(173, 173, 173)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(BTCobrar, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
+                            .addComponent(tfPatentesal))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 163, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(JLingrese)
+                        .addGap(100, 100, 100)))
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
@@ -106,11 +107,11 @@ public class salidaVehiculo extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addComponent(JLtitulo)
-                .addGap(49, 49, 49)
-                .addComponent(JLingrese)
                 .addGap(18, 18, 18)
+                .addComponent(JLingrese)
+                .addGap(59, 59, 59)
                 .addComponent(tfPatentesal, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(64, 64, 64)
+                .addGap(54, 54, 54)
                 .addComponent(BTCobrar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -136,7 +137,7 @@ public class salidaVehiculo extends javax.swing.JPanel {
             tipo.setPatente(tfPatentesal.getText());
             Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/estacionamientonuevaera","root", "");
             Statement stat = conexion.createStatement();
-            ResultSet rs = stat.executeQuery("SELECT horaEntrada,TipoVehiculo FROM vehiculo WHERE Patente='"+tfPatentesal.getText()+"' AND estado='Disponible'");
+            ResultSet rs = stat.executeQuery("SELECT hora_Entrada,Tipo_Vehiculo FROM vehiculo WHERE Patente='"+tfPatentesal.getText()+"' AND estado='Disponible'");
             rs.next();
             String horaSalida = rs.getString(1);
             Date horasalida = dateFormat.parse(horaSalida);
@@ -151,7 +152,7 @@ public class salidaVehiculo extends javax.swing.JPanel {
                 valorAPagar = minutosACobrar*20.1;
             }
             System.out.println("Valor a pagar por " + rs.getString(2) + "= " + valorAPagar );
-            stat.executeUpdate("UPDATE vehiculo SET horaSalida='"+ fechaHora + "', estado='No Disponible', valorPagado='"+ valorAPagar +"'WHERE Patente='"+tfPatentesal.getText()+"' AND estado='Disponible'");
+            stat.executeUpdate("UPDATE vehiculo SET hora_Salida='"+ fechaHora + "', estado='No Disponible', valor_Pagado='"+ valorAPagar +"'WHERE Patente='"+tfPatentesal.getText()+"' AND estado='Disponible'");
             int respuesta = JOptionPane.showConfirmDialog(null,"Valor a pagar:  $"+valorAPagar+"'\nDesea Imprimir Recibo","Salida de vehiculo",JOptionPane.YES_NO_OPTION); 
         
         } catch (SQLException ex) {

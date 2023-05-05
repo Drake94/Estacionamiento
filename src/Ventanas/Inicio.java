@@ -73,7 +73,7 @@ public class Inicio extends javax.swing.JFrame {
         jButtonCrear.setBackground(new java.awt.Color(2, 123, 164));
         jButtonCrear.setFont(new java.awt.Font("Perpetua", 0, 18)); // NOI18N
         jButtonCrear.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonCrear.setText("Registrar vehiculo");
+        jButtonCrear.setText("Registrar vehículo");
         jButtonCrear.setToolTipText("");
         jButtonCrear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -101,7 +101,7 @@ public class Inicio extends javax.swing.JFrame {
         jButtonListar.setBackground(new java.awt.Color(2, 123, 164));
         jButtonListar.setFont(new java.awt.Font("Perpetua", 0, 18)); // NOI18N
         jButtonListar.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonListar.setText("Lista de vehiculos");
+        jButtonListar.setText("Lista de vehículo");
         jButtonListar.setToolTipText("");
         jButtonListar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,7 +112,7 @@ public class Inicio extends javax.swing.JFrame {
         jButtonSalida.setBackground(new java.awt.Color(2, 123, 164));
         jButtonSalida.setFont(new java.awt.Font("Perpetua", 0, 18)); // NOI18N
         jButtonSalida.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonSalida.setText("Salida vehiculo");
+        jButtonSalida.setText("Salida vehículo");
         jButtonSalida.setToolTipText("");
         jButtonSalida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
