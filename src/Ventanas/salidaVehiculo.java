@@ -6,7 +6,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.*;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -154,6 +153,7 @@ public class salidaVehiculo extends javax.swing.JPanel {
             System.out.println("Valor a pagar por " + rs.getString(2) + "= " + valorAPagar );
             stat.executeUpdate("UPDATE vehiculo SET horaSalida='"+ fechaHora + "', estado='No Disponible', valorPagado='"+ valorAPagar +"'WHERE Patente='"+tfPatentesal.getText()+"' AND estado='Disponible'");
             int respuesta = JOptionPane.showConfirmDialog(null,"Valor a pagar:  $"+valorAPagar+"'\nDesea Imprimir Recibo","Salida de vehiculo",JOptionPane.YES_NO_OPTION); 
+        
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "El vehiculo no se encuentra en el Estacionamiento, por favor revise la placa ingresada");
             

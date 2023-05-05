@@ -14,6 +14,7 @@ public class Inicio extends javax.swing.JFrame {
     fondoInicio fondoInicio;
     crearVehiculos crea;
     salidaVehiculo salir;
+    EditarDatos Edit;
     
     public Inicio() {
         
@@ -37,6 +38,10 @@ public class Inicio extends javax.swing.JFrame {
         salir.setBounds(541,0,736,620);
         salir.setVisible(false);
         add(salir);
+        Edit= new EditarDatos();
+        Edit.setBounds(541, 0, 736, 620);
+        Edit.setVisible(false);
+        add(Edit);
      
     }
     
@@ -68,7 +73,7 @@ public class Inicio extends javax.swing.JFrame {
         jButtonCrear.setBackground(new java.awt.Color(2, 123, 164));
         jButtonCrear.setFont(new java.awt.Font("Perpetua", 0, 18)); // NOI18N
         jButtonCrear.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonCrear.setText("Crear vehiculo");
+        jButtonCrear.setText("Registrar vehiculo");
         jButtonCrear.setToolTipText("");
         jButtonCrear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -124,10 +129,13 @@ public class Inicio extends javax.swing.JFrame {
                 .addComponent(jLabelFondo, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButtonListar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(56, 56, 56)
+                        .addComponent(jButtonListar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addComponent(jButtonCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButtonSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -140,9 +148,9 @@ public class Inicio extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabelFondo, javax.swing.GroupLayout.PREFERRED_SIZE, 421, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButtonSalida, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+                    .addComponent(jButtonCrear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButtonListar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -174,11 +182,17 @@ public class Inicio extends javax.swing.JFrame {
 
     private void jButtonListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListarActionPerformed
         //Boton redirige a listar vehiculos
+        Edit.removeAll();
+        Edit.hide();
+        Edit.setVisible(false);
         setSize(1280, 650 );
+        //listarVehiculos list = new listarVehiculos();
         crea.setVisible(false);
-        listarVehiculos.setVisible(true);
         fondoInicio.setVisible(false);
         salir.setVisible(false);
+        //list.setBounds(541, 0, 736, 620);
+        //add(list);
+        listarVehiculos.setVisible(true);
         revalidate();
         repaint();
     }//GEN-LAST:event_jButtonListarActionPerformed

@@ -27,9 +27,9 @@ public class Vehiculo {
     
     public void validarMarca(){
         if(marca.length() > 15){
-            JOptionPane.showMessageDialog(null, "Patente no puede tener mas de 15 caracteres", "Error", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Marca no puede tener mas de 15 caracteres", "Error", JOptionPane.WARNING_MESSAGE);
         } else if(marca.length()<= 0){
-            JOptionPane.showMessageDialog(null, "Patente no ingresada, reintente", "Error", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Marca no ingresada, reintente", "Error", JOptionPane.WARNING_MESSAGE);
         }
     }
     

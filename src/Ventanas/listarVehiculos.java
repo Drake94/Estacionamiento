@@ -1,7 +1,5 @@
 package Ventanas;
 
-import estacionamientosnuevaera.PropietarioVehiculo;
-import estacionamientosnuevaera.Vehiculo;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -23,29 +21,92 @@ import javax.swing.table.TableColumnModel;
  */
 
 public class listarVehiculos extends javax.swing.JPanel {
-    Vehiculo vehiculo;
-    PropietarioVehiculo people;
-
+    EditarDatos EditarDatos;
+    String consulta;
+    String tipoVehiculo = "otro", estado = "", fecha =""; 
+    
+    
     
     public listarVehiculos() {
-        initComponents();
-        rbFuera.setSelected(true);
+        initComponents();        
+        EditarDatos = new EditarDatos();
+        EditarDatos.setBounds(541, 0, 736, 620);
+        add(EditarDatos);
+        EditarDatos.setVisible(false);
+        this.setBounds(541, 0, 736, 620);
+        this.setVisible(true);
+        rbEstacionado.setSelected(true);
+        cbMoto.setSelected(true);
+        cbauto.setSelected(true);
         TableColumnModel columnModel = tblVehiculos.getColumnModel();
-
-        columnModel.getColumn(0).setPreferredWidth(70);
-        columnModel.getColumn(0).setPreferredWidth(70);
-        columnModel.getColumn(0).setPreferredWidth(70);
-        columnModel.getColumn(0).setPreferredWidth(70);
-        columnModel.getColumn(0).setPreferredWidth(70); 
-        columnModel.getColumn(0).setPreferredWidth(70);
+        
+        columnModel.getColumn(0).setPreferredWidth(40);
+        columnModel.getColumn(0).setPreferredWidth(40);
+        columnModel.getColumn(0).setPreferredWidth(40);
+        columnModel.getColumn(0).setPreferredWidth(40);
+        columnModel.getColumn(0).setPreferredWidth(40);
+        columnModel.getColumn(0).setPreferredWidth(40);
+        
         
         //Valida y verifica que la libreria esta instalada
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(listarVehiculos.class.getName()).log(Level.SEVERE, null, ex);
-
-        }    
+        }
+        
+        DefaultTableModel modelo = (DefaultTableModel) tblVehiculos.getModel();
+        modelo.setRowCount(0);
+        
+        if(cbauto.isSelected()){
+            if(cbMoto.isSelected()){
+                tipoVehiculo = "";
+            }else{
+                tipoVehiculo = "Automovil";
+            }
+        } else if (cbMoto.isSelected()){
+            tipoVehiculo = "Moto";
+        }
+        
+        if(rbFuera.isSelected()){
+            estado = "No Disponible";   
+        }
+        if(rbEstacionado.isSelected()){
+            estado = "Disponible";
+        }
+        if (cal.getDate() != null){
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date date = cal.getDate();
+            fecha = dateFormat.format(date);   
+        }
+        
+        try{
+            Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/estacionamientonuevaera","root", "");
+            Statement stat = conexion.createStatement();
+            consulta = "SELECT * FROM vehiculo WHERE estado ='"+ estado + "' AND TipoVehiculo LIKE'%" + tipoVehiculo + "%' AND Patente LIKE '%" + tf1patente.getText() + "%' AND Propietario Like '%" + tf1Dueño.getText() + "%' AND horaEntrada LIKE'" + fecha + "%'"; 
+            System.out.println(consulta);
+            ResultSet rs = stat.executeQuery(consulta);
+            rs.next();
+            
+            do {
+                String horaSalida = rs.getString(8);
+                String valorPagado = rs.getString(9);
+                if(horaSalida == null){
+                    horaSalida = "No ha salido";
+                    valorPagado = "0";
+                } else {
+                    horaSalida = rs.getString(8).substring(10).substring(0,6);
+                    valorPagado = rs.getString(9);
+                }
+                String[] fila = {rs.getString(2), rs.getString(3), rs.getString(5), rs.getString(4), rs.getString(7).substring(10).substring(0,6), horaSalida};
+                modelo.addRow(fila);           
+            } while (rs.next());
+            
+        }catch(SQLException ex) {
+            JOptionPane.showMessageDialog(null, "El vehiculo no se encuentra en el Estacionamiento, por favor revise la placa ingresada");
+            
+            Logger.getLogger(listarVehiculos.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }
     
@@ -69,18 +130,18 @@ public class listarVehiculos extends javax.swing.JPanel {
         tf1patente = new javax.swing.JTextField();
         tf1Dueño = new javax.swing.JTextField();
         cal = new com.toedter.calendar.JDateChooser();
-        jButton1 = new javax.swing.JButton();
+        JBEdit = new javax.swing.JButton();
         jButtonBuscar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(51, 153, 255));
 
         jLabelListar.setFont(new java.awt.Font("Perpetua", 1, 48)); // NOI18N
         jLabelListar.setForeground(new java.awt.Color(242, 242, 242));
-        jLabelListar.setText("Buscar Vehiculos");
+        jLabelListar.setText("Buscar vehículo");
 
         jLabelTipovehiculoBuscar.setFont(new java.awt.Font("Perpetua", 0, 24)); // NOI18N
         jLabelTipovehiculoBuscar.setForeground(new java.awt.Color(242, 242, 242));
-        jLabelTipovehiculoBuscar.setText("Tipo de vehiculo");
+        jLabelTipovehiculoBuscar.setText("Tipo de vehículo");
 
         jLabelFecha.setFont(new java.awt.Font("Perpetua", 0, 24)); // NOI18N
         jLabelFecha.setForeground(new java.awt.Color(242, 242, 242));
@@ -96,7 +157,7 @@ public class listarVehiculos extends javax.swing.JPanel {
 
         jLabelUbicacion.setFont(new java.awt.Font("Perpetua", 0, 24)); // NOI18N
         jLabelUbicacion.setForeground(new java.awt.Color(242, 242, 242));
-        jLabelUbicacion.setText("Ubicacion");
+        jLabelUbicacion.setText("Ubicación");
 
         rbEstacionado.setBackground(new java.awt.Color(51, 153, 255));
         rbEstacionado.setFont(new java.awt.Font("Perpetua", 0, 24)); // NOI18N
@@ -126,7 +187,7 @@ public class listarVehiculos extends javax.swing.JPanel {
         cbauto.setBackground(new java.awt.Color(51, 153, 255));
         cbauto.setFont(new java.awt.Font("Perpetua", 0, 24)); // NOI18N
         cbauto.setForeground(new java.awt.Color(242, 242, 242));
-        cbauto.setText("Automovil");
+        cbauto.setText("Automóvil");
         cbauto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbautoActionPerformed(evt);
@@ -138,7 +199,7 @@ public class listarVehiculos extends javax.swing.JPanel {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Patente", "Marca", "Dueño", "Tipo de vehiculo", "Hora de entrada", "Hora de salida"
+                "Patente", "Marca", "Dueño", "Tipo de vehículo", "Hora de entrada", "Hora de salida"
             }
         ) {
             Class[] types = new Class [] {
@@ -171,16 +232,18 @@ public class listarVehiculos extends javax.swing.JPanel {
         cal.setToolTipText("");
         cal.setFont(new java.awt.Font("Perpetua", 0, 24)); // NOI18N
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setForeground(new java.awt.Color(51, 153, 255));
-        jButton1.setText("Cerrar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        JBEdit.setBackground(new java.awt.Color(255, 255, 255));
+        JBEdit.setFont(new java.awt.Font("Perpetua", 0, 24)); // NOI18N
+        JBEdit.setForeground(new java.awt.Color(51, 153, 255));
+        JBEdit.setText("Editar vehículo");
+        JBEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                JBEditActionPerformed(evt);
             }
         });
 
         jButtonBuscar.setBackground(new java.awt.Color(255, 255, 255));
+        jButtonBuscar.setFont(new java.awt.Font("Perpetua", 0, 24)); // NOI18N
         jButtonBuscar.setForeground(new java.awt.Color(51, 153, 255));
         jButtonBuscar.setText("Buscar");
         jButtonBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -193,16 +256,6 @@ public class listarVehiculos extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(117, 117, 117)
-                .addComponent(jButtonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(139, 139, 139))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(191, 191, 191)
-                .addComponent(jLabelListar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -235,6 +288,17 @@ public class listarVehiculos extends javax.swing.JPanel {
                             .addComponent(cbauto)
                             .addComponent(rbEstacionado))))
                 .addGap(0, 29, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(191, 191, 191)
+                        .addComponent(jLabelListar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(139, 139, 139)
+                        .addComponent(jButtonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(127, 127, 127)
+                        .addComponent(JBEdit)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -274,8 +338,8 @@ public class listarVehiculos extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(49, 49, 49)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(JBEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(75, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -295,8 +359,7 @@ public class listarVehiculos extends javax.swing.JPanel {
     private void tf1DueñoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf1DueñoActionPerformed
         
     }//GEN-LAST:event_tf1DueñoActionPerformed
-    String consulta;
-    String tipoVehiculo = "otro", estado = "", fecha =""; 
+    
     private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
         DefaultTableModel modelo = (DefaultTableModel) tblVehiculos.getModel();
         modelo.setRowCount(0);
@@ -352,20 +415,23 @@ public class listarVehiculos extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jButtonBuscarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.setVisible(false);
-        fondoInicio fon = new fondoInicio();
-        fon.setBounds(541, 0, 736, 620);
-        add(fon);
-        fon.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void JBEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBEditActionPerformed
+        this.removeAll();
+        
+        EditarDatos Edit = new EditarDatos();
+        Edit.setBounds(0, 0, 736, 620);
+        add(Edit);
+        Edit.setVisible(true);
+        Edit.repaint();
+        Edit.revalidate();
+    }//GEN-LAST:event_JBEditActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton JBEdit;
     private com.toedter.calendar.JDateChooser cal;
     private javax.swing.JCheckBox cbMoto;
     private javax.swing.JCheckBox cbauto;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonBuscar;
     private javax.swing.JLabel jLabelDueñoBuscar;
     private javax.swing.JLabel jLabelFecha;

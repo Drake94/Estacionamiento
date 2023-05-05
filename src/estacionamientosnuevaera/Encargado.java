@@ -9,6 +9,13 @@ import javax.swing.JOptionPane;
  */
 public class Encargado extends Persona{
     
+    String clave, Email;
+    
+    public Encargado(String nombre, String rut){
+        super(nombre, rut);        
+    }
+   
+    
     @Override
     public void saludo(){
         JOptionPane.showMessageDialog(null, "Hola, Bienvenido", "Saludo", JOptionPane.INFORMATION_MESSAGE);

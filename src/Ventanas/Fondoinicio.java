@@ -1,7 +1,8 @@
 package Ventanas;
 /**
- *
- * @author draco
+ * @author Diego Ortega
+ * @Email: draco_9431@hotmail.com
+ * @fecha creacion 02/05/2023
  */
 public class fondoInicio extends javax.swing.JPanel {
 

@@ -58,7 +58,7 @@ public class crearVehiculos extends javax.swing.JPanel {
 
         jLabelCrearvehiculo.setFont(new java.awt.Font("Perpetua", 1, 72)); // NOI18N
         jLabelCrearvehiculo.setForeground(new java.awt.Color(242, 242, 242));
-        jLabelCrearvehiculo.setText("Crear Vehiculo");
+        jLabelCrearvehiculo.setText("Registrar vehículo");
 
         jLabelPatente.setFont(new java.awt.Font("Perpetua", 0, 48)); // NOI18N
         jLabelPatente.setForeground(new java.awt.Color(242, 242, 242));
@@ -70,7 +70,7 @@ public class crearVehiculos extends javax.swing.JPanel {
 
         jLabelTipoVehiculo.setFont(new java.awt.Font("Perpetua", 0, 48)); // NOI18N
         jLabelTipoVehiculo.setForeground(new java.awt.Color(242, 242, 242));
-        jLabelTipoVehiculo.setText("Tipo de vehiculo");
+        jLabelTipoVehiculo.setText("Tipo de vehículo");
 
         jBMoto.setBackground(new java.awt.Color(51, 153, 255));
         jBMoto.setFont(new java.awt.Font("Perpetua", 0, 36)); // NOI18N
@@ -87,7 +87,7 @@ public class crearVehiculos extends javax.swing.JPanel {
         jBAuto.setBackground(new java.awt.Color(51, 153, 255));
         jBAuto.setFont(new java.awt.Font("Perpetua", 0, 36)); // NOI18N
         jBAuto.setForeground(new java.awt.Color(242, 242, 242));
-        jBAuto.setText("Automovil");
+        jBAuto.setText("Automóvil");
         jBAuto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jBAuto.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jBAuto.addActionListener(new java.awt.event.ActionListener() {
@@ -99,7 +99,7 @@ public class crearVehiculos extends javax.swing.JPanel {
         jButtonRegistrar.setBackground(new java.awt.Color(255, 255, 255));
         jButtonRegistrar.setFont(new java.awt.Font("Perpetua", 1, 36)); // NOI18N
         jButtonRegistrar.setForeground(new java.awt.Color(51, 153, 255));
-        jButtonRegistrar.setText("Registrar vehiculo");
+        jButtonRegistrar.setText("Registrar vehículo");
         jButtonRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonRegistrarActionPerformed(evt);
@@ -165,7 +165,7 @@ public class crearVehiculos extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(106, 106, 106)
                         .addComponent(jLabelTipoVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
@@ -207,6 +207,7 @@ public class crearVehiculos extends javax.swing.JPanel {
 
     private void TFPatenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFPatenteActionPerformed
         Vehiculo tipo = new Vehiculo();
+        tipo.setPatente(TFPatente.getText());
         tipo.validarPatente();
     }//GEN-LAST:event_TFPatenteActionPerformed
 
@@ -238,14 +239,6 @@ public class crearVehiculos extends javax.swing.JPanel {
             Calendar cal = Calendar.getInstance();
             Date date = cal.getTime();
             fechaHora = dateFormat.format(date);
-            /*for (int i=0; i<fechaHora.;i++){
-                if (fechaHora[i]!= null){
-                    fechaHora[i] = dateFormat.format(date);
-                    JOptionPane.showMessageDialog(null, fechaHora[i]);
-            }else{
-                JOptionPane.showMessageDialog(null, "ya esta opcupado");
-                }
-            }*/
             System.out.print(dateFormat.format(date));
             Statement stat = conexion.createStatement();
             String sql = "INSERT INTO vehiculo (Patente, marca, TipoVehiculo, Propietario, horaEntrada, estado ) VALUES ('" + tipo.getPatente()+ "','" + tipo.getMarca() + "','" + tipo.getTipoVehiculo() + "','" + people.getNombre() + "','" + fechaHora + "','Disponible')";
